@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -9,23 +8,51 @@ import java.util.List;
 public class TypeEquipment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // <-- автоинкремент из базы
+    @Column(name = "idtypeequipment")
     private Long idtypeequipment;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "typeEquipment", fetch = FetchType.LAZY)
     @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Equipment> equipments;
 
+    // ===== Геттеры и сеттеры =====
 
-    // геттеры/сеттеры
-    public Long getId() { return idtypeequipment; }
-    public void setId(Long id) { this.idtypeequipment = id; }
+    public Long getIdtypeequipment() {
+        return idtypeequipment;
+    }
 
-    public String getTypeName() { return name; }
-    public void setTypeName(String typeName) { this.name = typeName; }
+    public void setIdtypeequipment(Long idtypeequipment) {
+        this.idtypeequipment = idtypeequipment;
+    }
 
-    public List<Equipment> getEquipments() { return equipments; }
-    public void setEquipments(List<Equipment> equipments) { this.equipments = equipments; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Equipment> getEquipments() {
+        return equipments;
+    }
+
+    public void setEquipments(List<Equipment> equipments) {
+        this.equipments = equipments;
+    }
 }
