@@ -35,15 +35,45 @@ public class EquipmentController {
         return equipmentService.getEquipmentById(id);
     }
 
-    @Operation(summary = "Создание оборудования",
-            description = "Создаёт новое оборудование и привязывает к нему тип через ID")
+    @Operation(
+            summary = "Создание оборудования",
+            description = "Создаёт новое оборудование и привязывает к нему тип через ID",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Пример JSON для создания оборудования",
+                    required = true,
+                    content = @io.swagger.v3.oas.annotations.media.Content(
+                            mediaType = "application/json",
+                            examples = {
+                                    @io.swagger.v3.oas.annotations.media.ExampleObject(
+                                            name = "Пример запроса",
+                                            value = "{\n  \"name\": \"Гантель 10 кг\",\n  \"state\": \"в использовании\",\n  \"typeId\": 1\n}"
+                                    )
+                            }
+                    )
+            )
+    )
     @PostMapping("")
     public Equipment createEquipment(@RequestBody Equipment equipment) {
         return equipmentService.createEquipment(equipment, equipment.getTypeId());
     }
 
-    @Operation(summary = "Обновление оборудования",
-            description = "Обновляет данные оборудования по ID")
+    @Operation(
+            summary = "Создание оборудования",
+            description = "Создаёт новое оборудование и привязывает к нему тип через ID",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Пример JSON для создания оборудования",
+                    required = true,
+                    content = @io.swagger.v3.oas.annotations.media.Content(
+                            mediaType = "application/json",
+                            examples = {
+                                    @io.swagger.v3.oas.annotations.media.ExampleObject(
+                                            name = "Пример создания оборудования",
+                                            value = "{\n  \"name\": \"Гантель 10 кг\",\n  \"state\": \"в использовании\",\n  \"typeId\": 1\n}"
+                                    )
+                            }
+                    )
+            )
+    )
     @PutMapping("/{id}")
     public Equipment updateEquipment(
             @Parameter(description = "ID оборудования для обновления", example = "1")
